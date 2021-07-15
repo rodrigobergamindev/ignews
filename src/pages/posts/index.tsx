@@ -3,8 +3,21 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next';
 import { getPrismicClient } from '../../services/prismic';
 import Prismic from '@prismicio/client'
+import {RichText} from 'prismic-dom'
 
-export default function Posts() {
+type Post = { 
+    slug: string,
+    title: string,
+    excerpt: string,
+    updatedAt: string,
+
+}
+
+interface PostProps {
+    posts: Post[]
+}
+
+export default function Posts({posts}: PostProps) {
     return (
         <>
         <Head>
@@ -13,23 +26,17 @@ export default function Posts() {
 
         <main className={styles.container}>
             <div className={styles.posts}>
-                <a href="#">
-                    <time>12 de março de 2021</time>
-                    <strong>Creating a Mnorepo with Lerna & Yarn Workspaces</strong>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
-                </a>
 
-                <a href="#">
-                    <time>12 de março de 2021</time>
-                    <strong>Creating a Mnorepo with Lerna & Yarn Workspaces</strong>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
-                </a>
+                {posts.map(post => (
 
-                <a href="#">
-                    <time>12 de março de 2021</time>
-                    <strong>SSG with Next.js</strong>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
-                </a>
+                        <a key={post.slug} href="#">
+                        <time>{post.updatedAt}</time>
+                        <strong>{post.title}</strong>
+                        <p>{post.excerpt}</p>
+                        </a>
+
+                ))}
+            
             </div>
         </main>
         </>
@@ -49,8 +56,23 @@ export const getStaticProps: GetStaticProps = async () => {
     }
     )
 
-    console.log(JSON.stringify(response, null, 2))
+    const posts = response.results.map(post => {
+        return {
+            slug: post.uid,
+            title: RichText.asText(post.data.title),
+            excerpt: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
+            updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            })
+        }
+    })
+
+    console.log(posts[0].updatedAt)
     return {
-        props: {}
+        props: {
+            posts
+        }
     }
 }
