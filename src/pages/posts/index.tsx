@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps = async () => {
         }
     })
 
-    console.log(posts[0].updatedAt)
+   
     return {
         props: {
             posts
