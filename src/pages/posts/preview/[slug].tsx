@@ -7,7 +7,6 @@ import { RichText } from "prismic-dom"
 import { useEffect } from "react"
 import { getPrismicClient } from "../../../services/prismic"
 
-import '../../../styles/post.scss'
 
 
 

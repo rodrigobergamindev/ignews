@@ -1,4 +1,4 @@
-import '../styles/home.scss';
+
 import {GetStaticProps} from 'next'
 import Head from 'next/head';
 import { SubscribeButton } from '../components/SubscribeButton';
