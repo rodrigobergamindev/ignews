@@ -4,7 +4,7 @@ import Head from "next/head"
 import { RichText } from "prismic-dom"
 import { getPrismicClient } from "../../services/prismic"
 
-import styles from '../../styles/post.module.scss';
+import '../../styles/post.module.scss';
 
 
 
@@ -25,13 +25,13 @@ export default function Post({post}: PostProps) {
 
         </Head>
 
-        <main className={styles.container}>
-            <article className={styles.post}>
+        <main className="container">
+            <article className="post">
                 <h1>{post.title}</h1>
                 <time>{post.updatedAt}</time>
 
                 <div 
-                className={styles.postContent}
+                className="postContent"
                 dangerouslySetInnerHTML={{__html: post.content}}/>
             </article>
         </main>

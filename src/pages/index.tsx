@@ -1,4 +1,4 @@
-import styles from '../styles/home.module.scss';
+import '../styles/home.scss';
 import {GetStaticProps} from 'next'
 import Head from 'next/head';
 import { SubscribeButton } from '../components/SubscribeButton';
@@ -26,8 +26,8 @@ export default function Home({product}: HomeProps) {
       <title>Home | ig.news</title>
     </Head>
     
-    <main className={styles.contentContainer}>
-        <section className={styles.hero}>
+    <main className="contentContainer">
+        <section className="hero">
           <span>👏 Hey, welcome</span>
           <h1>News about the <span>React</span> world.</h1>
 

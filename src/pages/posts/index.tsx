@@ -1,4 +1,4 @@
-import styles from '../../styles/styles.module.scss';
+import '../../styles/styles.module.scss';
 import Head from 'next/head'
 import { GetStaticProps } from 'next';
 import { getPrismicClient } from '../../services/prismic';
@@ -25,8 +25,8 @@ export default function Posts({posts}: PostProps) {
             <title>Posts | Ignews</title>
         </Head>
 
-        <main className={styles.container}>
-            <div className={styles.posts}>
+        <main className="container">
+            <div className="posts">
 
                 {posts.map(post => (
                         <Link href={`/posts/${post.slug}`} key={post.slug}>
