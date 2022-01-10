@@ -7,7 +7,7 @@ import { RichText } from "prismic-dom"
 import { useEffect } from "react"
 import { getPrismicClient } from "../../../services/prismic"
 
-import styles from '../post.module.scss';
+import '../../../styles/post.scss'
 
 
 
@@ -39,16 +39,16 @@ export default function PostPreview({post}: PostPreviewProps) {
             <title>{post.title} | Ignews</title>
         </Head>
 
-        <main className={styles.container}>
-            <article className={styles.post}>
+        <main className="container">
+            <article className="post">
                 <h1>{post.title}</h1>
                 <time>{post.updatedAt}</time>
 
                 <div 
-                className={`${styles.postContent} ${styles.previewContent}`}
+                className="postContent previewContent"
                 dangerouslySetInnerHTML={{__html: post.content}}/>
 
-                <div className={styles.continueReading}>
+                <div className="continueReading">
                     Wanna continue reading?
                     <Link href="/">
                         <a href="">Subscribe now 🤗</a>
