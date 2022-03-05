@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react' 
+import {render, screen} from '@testing-library/react' 
 import { Header } from '.'
 
 
@@ -12,16 +12,24 @@ jest.mock("next/router", () => {
     }
 })
 
+jest.mock('next-auth/client', () => {
+    return {
+        useSession() {
+            return [null, false]
+        }
+    }
+})
 
-describe('ActiveLink component', () => {
 
-    it('active link renders correctly', () => {
-        const {debug, getByText } = render(
+describe('Header component', () => {
+
+    it('header renders corretly elements', () => {
+        render(
             <Header/>
         )
     
-        expect(getByText("Home")).toBeInTheDocument()
-        expect(getByText("Posts")).toBeInTheDocument()
+        expect(screen.getByText("Home")).toBeInTheDocument()
+        expect(screen.getByText("Posts")).toBeInTheDocument()
     })
     
 
