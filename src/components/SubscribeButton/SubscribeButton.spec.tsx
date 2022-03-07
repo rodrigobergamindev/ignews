@@ -28,12 +28,12 @@ describe('SubscribeButton component', () => {
 
 
     it('redirects user to sign in whe not authenticated', () => {
-
+        const signInMocked = mocked(signIn)
         const useSessionMocked = mocked(useSession)
 
         useSessionMocked.mockReturnValueOnce([null, false])
 
-        const signInMocked = mocked(signIn)
+      
 
         render(
             <SubscribeButton/>
@@ -77,7 +77,7 @@ describe('SubscribeButton component', () => {
 
         fireEvent.click(subscribeButton)
 
-        expect(pushMock).toHaveBeenCalled()
+        expect(pushMock).toHaveBeenCalledWith('/posts')
     })
 
 })
